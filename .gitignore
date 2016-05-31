@@ -27,3 +27,6 @@
 *.out
 *.app
 bin
+
+*.vscode
+tp1/tp1
