@@ -16,7 +16,6 @@ public:
 	void setLevel(float);
 protected:
 private:
-	bool jumping;
 	Vector2f position;
 	Sprite sprite;
 	Texture texture;

@@ -1,12 +1,12 @@
 #include "Game.h"
-#define HEIGHT 600
-#define WIDTH 800
+#include "Saw.h"
+#define HEIGHT 700
+#define WIDTH 1200
+#define DIFICULT 0
 
 Game::Game()
 {
 	backgroundTexture.loadFromFile("img/background.png");
-	floorTexture.loadFromFile("img/floor.jpg");
-	floorTexture.setRepeated(true);
 	backgroundTexture.setRepeated(true);
 	backgroundSprite.setTexture(backgroundTexture);
 	backgroundSprite.setTextureRect({ 0, 0, WIDTH, HEIGHT});
@@ -14,16 +14,15 @@ Game::Game()
 	float distance = HEIGHT / LEVELS;
 
 	for (int i = 0; i < LEVELS; i++) {
-		levels[i] = HEIGHT - distance * i - 10;
-		floorsSprites[i].setTexture(floorTexture);
-		floorsSprites[i].setTextureRect({ 0, i*5, WIDTH, 10});
-		floorsSprites[i].setPosition(0, levels[i]);
+		levels[i].setDificult(DIFICULT + i);
+		levels[i].setWidth(WIDTH);
+		levels[i].setY(HEIGHT - distance * i - 10);
 	}
 
-	pWnd = new RenderWindow(VideoMode(WIDTH, HEIGHT), "A los piedrazos");
+	pWnd = new RenderWindow(VideoMode(WIDTH, HEIGHT), "Cuidado que te sierra");
 	pWnd->setFramerateLimit(60);
 
-	character.setLevel(levels[level]);
+	character.setLevel(levels[level].getY());
 }
 
 Game::~Game()
@@ -67,7 +66,7 @@ void Game::processKey(int keyCode)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Right)) character.moveRight();
 	if (Keyboard::isKeyPressed(Keyboard::Left)) character.moveLeft();
-	if (Keyboard::isKeyPressed(Keyboard::Up)) character.setLevel(levels[++level]);
+	if (Keyboard::isKeyPressed(Keyboard::Up) && level < LEVELS - 1) character.setLevel(levels[++level].getY());
 	// if(Keyboard::isKeyPressed(Keyboard::Down)) character.kneel();
 
 	switch (keyCode)
@@ -86,9 +85,9 @@ void Game::updateGame()
 void Game::drawGame()
 {
 	pWnd->draw(backgroundSprite);
-	for each (Sprite floor in floorsSprites)
+	for each (Level level in levels)
 	{
-		pWnd->draw(floor);
+		level.draw(*pWnd);
 	}
 	character.draw(*pWnd);
 }

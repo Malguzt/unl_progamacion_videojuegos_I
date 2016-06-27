@@ -4,7 +4,6 @@ using namespace sf;
 
 Character::Character()
 {
-	jumping = false;
 	position = Vector2f(400, 500);
 	texture.loadFromFile("img/character.png");
 	sprite.setTexture(texture);
@@ -12,7 +11,6 @@ Character::Character()
 }
 
 Character::~Character() {}
-
 
 void Character::draw(RenderWindow &gm)
 {
@@ -27,14 +25,14 @@ void Character::update()
 void Character::moveLeft()
 {
 	if (position.x > 0) {
-		position.x -= 10;
+		position.x -= 30;
 	}
 }
 
 void Character::moveRight()
 {
 	if (position.x < 730) {
-		position.x += 10;
+		position.x += 30;
 	}
 }
 

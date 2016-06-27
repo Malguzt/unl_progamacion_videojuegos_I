@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "Character.h"
+#include "Level.h"
 
 using namespace sf;
 using namespace std;
@@ -24,10 +25,8 @@ private:
 	void processKey(int keyCode);
 	Texture backgroundTexture;
 	Sprite backgroundSprite;
-	int levels[LEVELS];
+	Level levels[LEVELS];
 	int level = 0;
-	Texture floorTexture;
-	Sprite floorsSprites[LEVELS];
 };
 
 #endif // GAME_H
