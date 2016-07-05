@@ -10,10 +10,13 @@ public:
 	float getY();
 	void draw(RenderWindow &gm);
 	void setDificult(int value);
+	void releaseSaw();
+	void moveSaw();
 private:
 	int dificult;
+	int width;
 	List saws;
-	Saw *freeSaw;
+	Saw *freeSaw = nullptr;
 	Texture floorTexture;
 	Sprite floorSprite;
 };

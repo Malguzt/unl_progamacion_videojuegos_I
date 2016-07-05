@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Saw.h"
+#include <sstream>
 #define HEIGHT 700
 #define WIDTH 1200
 #define DIFICULT 0
@@ -14,9 +15,9 @@ Game::Game()
 	float distance = HEIGHT / LEVELS;
 
 	for (int i = 0; i < LEVELS; i++) {
-		levels[i].setDificult(DIFICULT + i);
-		levels[i].setWidth(WIDTH);
 		levels[i].setY(HEIGHT - distance * i - 10);
+		levels[i].setWidth(WIDTH);
+		levels[i].setDificult(DIFICULT + i);
 	}
 
 	pWnd = new RenderWindow(VideoMode(WIDTH, HEIGHT), "Cuidado que te sierra");
@@ -34,17 +35,34 @@ void Game::Go()
 {
 	Event evt;
 
+	int i = 100;
 	while (pWnd->isOpen())
 	{
-
 		while (pWnd->pollEvent(evt))
 		{
 			processEvent(evt);
 		}
 
 		pWnd->clear();
-		updateGame();
-		drawGame();
+		if (true)
+		{
+			updateGame();
+			drawGame();
+		}
+		else
+		{
+			Font font;
+			font.loadFromFile("sixty.ttf");
+			Text text;
+			text.setFont(font);
+			text.setColor(Color::Green);
+
+			text.setCharacterSize(50);
+			text.setPosition(300, 100);
+			text.setString("Perdiste\n");
+
+			pWnd->draw(text);
+		}
 		pWnd->display();
 	}
 }
@@ -80,6 +98,10 @@ void Game::processKey(int keyCode)
 void Game::updateGame()
 {
 	character.update();
+	for (int i = 0; i < LEVELS; i++)
+	{
+		levels[i].moveSaw();
+	}
 }
 
 void Game::drawGame()

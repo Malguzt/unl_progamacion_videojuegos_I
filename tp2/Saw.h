@@ -12,9 +12,12 @@ public:
 	Saw* getNext();
 	void setNext(Saw *next);
 	void setPosition(float x, float y);
-	void moveX(float x);
+	float moveX(float x);
+	void setSpeed(int value);
+	void move();
+	bool inScreen(int width);
 private:
-	Vector2f position;
+	int speed;
 	Sprite sprite;
 	Texture texture;
 	Saw *next = nullptr;

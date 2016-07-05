@@ -5,7 +5,6 @@ Level::Level()
 	floorTexture.loadFromFile("img/floor.jpg");
 	floorTexture.setRepeated(true);
 	floorSprite.setTexture(floorTexture);
-	freeSaw = nullptr;
 }
 
 Level::~Level()
@@ -18,8 +17,9 @@ void Level::setY(float y)
 	saws.setPosition(floorSprite.getPosition());
 }
 
-void Level::setWidth(int width)
+void Level::setWidth(int value)
 {
+	width = value;
 	floorSprite.setTextureRect({ 0, 0, width, 10 });
 }
 
@@ -44,5 +44,39 @@ void Level::setDificult(int value)
 	saws.clean();
 	for (int i = 0; i < dificult; i++) {
 		saws.add(new Saw());
+	}
+}
+
+void Level::releaseSaw()
+{
+	freeSaw = saws.getNext();
+	freeSaw->setNext(nullptr);
+
+	if (freeSaw != nullptr) 
+	{
+		freeSaw->setSpeed(dificult);
+	}
+}
+
+void Level::moveSaw()
+{
+	if (freeSaw != nullptr)
+	{
+		if (freeSaw->inScreen(width))
+		{
+			freeSaw->move();
+		}
+		else {
+			freeSaw->inScreen(width);
+			saws.add(freeSaw);
+			releaseSaw();
+		}
+	}
+	else
+	{
+		if (dificult > 0)
+		{
+			releaseSaw();
+		}
 	}
 }

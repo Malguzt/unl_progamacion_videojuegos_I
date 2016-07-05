@@ -9,7 +9,9 @@ public:
 	void add(Saw *saw);
 	void setPosition(float x, float y);
 	void setPosition(Vector2f newPosition);
+	void sortSaws();
 	void draw(RenderWindow &gm);
+	Saw* getNext();
 	void clean();
 private:
 	Saw *first = nullptr;

@@ -14,39 +14,36 @@ List::~List()
 
 void List::add(Saw *saw)
 {
-	saw->setPosition(position.x, position.y);
+	saw->setPosition(position.x + 35, position.y);
 	if (first == nullptr) 
 	{
 		first = saw;
 	}
 	else
 	{
-		Saw *node = first;
-		while (node->getNext() != nullptr)
-		{
-			node->moveX(SAW_DIAMETER);
-			node = node->getNext();
-		}
-		node->setNext(saw);
+		getLast()->setNext(saw);
+		sortSaws();
 	}
 }
 
 void List::setPosition(float x, float y)
 {
 	position = Vector2f(x, y);
-	Saw *node = first;
-	int partial = SAW_DIAMETER / 2;
-	while (node != nullptr)
+	if (first != nullptr)
 	{
-		node->setPosition(position.x + partial, position.y);
-		partial += SAW_DIAMETER;
-		node = node->getNext();
+		getLast()->setPosition(position.x + 35, position.y);
+		sortSaws();
 	}
 }
 
 void List::setPosition(Vector2f newPosition)
 {
 	setPosition(newPosition.x, newPosition.y);
+}
+
+void List::sortSaws()
+{
+	first->moveX(SAW_DIAMETER);
 }
 
 void List::draw(RenderWindow & gm)
@@ -73,10 +70,21 @@ void List::clean()
 	first = nullptr;
 }
 
+Saw* List::getNext()
+{
+	Saw *next = first;
+	if (first != nullptr)
+	{
+		first = first->getNext();
+	}
+
+	return next;
+}
+
 Saw * List::getLast()
 {
 	Saw *node = first;
-	while (node->getNext() != nullptr)
+	while (node != nullptr && node->getNext() != nullptr)
 	{
 		node = node->getNext();
 	}
