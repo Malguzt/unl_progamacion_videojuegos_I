@@ -14,12 +14,12 @@ public:
 	void moveRight();
 	void moveLeft();
 	void setLevel(float);
+	FloatRect getArea();
 protected:
 private:
 	Vector2f position;
 	Sprite sprite;
 	Texture texture;
-	void changePosition();
 };
 
 #endif // CHARACTER_H

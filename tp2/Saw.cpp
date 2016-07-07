@@ -59,3 +59,8 @@ bool Saw::inScreen(int width)
 	float x = sprite.getPosition().x;
 	return x > 0 && x < width + 64;
 }
+
+FloatRect Saw::getArea()
+{
+	return FloatRect(sprite.getPosition().x - 32, sprite.getPosition().y - 32, 60, 60);
+}

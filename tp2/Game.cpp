@@ -7,6 +7,11 @@
 
 Game::Game()
 {
+	font.loadFromFile("sixty.ttf");
+	text.setFont(font);
+	text.setCharacterSize(50);
+	text.setPosition(300, 100);
+
 	backgroundTexture.loadFromFile("img/background.png");
 	backgroundTexture.setRepeated(true);
 	backgroundSprite.setTexture(backgroundTexture);
@@ -19,6 +24,11 @@ Game::Game()
 		levels[i].setWidth(WIDTH);
 		levels[i].setDificult(DIFICULT + i);
 	}
+
+	doorTexture.loadFromFile("img/door.png");
+	doorSprite.setTexture(doorTexture);
+	doorSprite.setPosition(WIDTH / 2 - 37, levels[LEVELS - 1].getY() - 80);
+	doorRect = FloatRect(doorSprite.getPosition(), Vector2f(37, 80));
 
 	pWnd = new RenderWindow(VideoMode(WIDTH, HEIGHT), "Cuidado que te sierra");
 	pWnd->setFramerateLimit(60);
@@ -44,26 +54,25 @@ void Game::Go()
 		}
 
 		pWnd->clear();
-		if (true)
+		if (lost)
+		{
+			text.setColor(Color::Red);
+			text.setString("Perdiste\n");
+			pWnd->draw(text);
+		}
+		else if (win)
+		{
+			text.setColor(Color::Green);
+			text.setString("Ganaste\n");
+			pWnd->draw(text);
+		}
+		else
 		{
 			updateGame();
 			drawGame();
 		}
-		else
-		{
-			Font font;
-			font.loadFromFile("sixty.ttf");
-			Text text;
-			text.setFont(font);
-			text.setColor(Color::Green);
-
-			text.setCharacterSize(50);
-			text.setPosition(300, 100);
-			text.setString("Perdiste\n");
-
-			pWnd->draw(text);
-		}
 		pWnd->display();
+
 	}
 }
 
@@ -102,11 +111,15 @@ void Game::updateGame()
 	{
 		levels[i].moveSaw();
 	}
+	lost = levels[level].checkCollision(character.getArea());
+
+	win = doorRect.intersects(character.getArea());
 }
 
 void Game::drawGame()
 {
 	pWnd->draw(backgroundSprite);
+	pWnd->draw(doorSprite);
 	for each (Level level in levels)
 	{
 		level.draw(*pWnd);

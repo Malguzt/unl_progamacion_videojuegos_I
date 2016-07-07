@@ -17,12 +17,19 @@ public:
 	virtual ~Game();
 	void Go();
 private:
+	Font font;
+	Text text;
+	bool win = false;
+	bool lost = false;
 	RenderWindow *pWnd;
 	Character character;
 	void processEvent(Event &evt);
 	void drawGame();
 	void updateGame();
 	void processKey(int keyCode);
+	Texture doorTexture;
+	Sprite doorSprite;
+	FloatRect doorRect;
 	Texture backgroundTexture;
 	Sprite backgroundSprite;
 	Level levels[LEVELS];

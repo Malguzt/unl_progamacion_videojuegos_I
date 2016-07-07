@@ -12,6 +12,7 @@ public:
 	void setDificult(int value);
 	void releaseSaw();
 	void moveSaw();
+	bool checkCollision(FloatRect characterArea);
 private:
 	int dificult;
 	int width;

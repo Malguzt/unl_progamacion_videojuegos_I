@@ -54,7 +54,7 @@ void Level::releaseSaw()
 
 	if (freeSaw != nullptr) 
 	{
-		freeSaw->setSpeed(dificult);
+		freeSaw->setSpeed(dificult * 2);
 	}
 }
 
@@ -79,4 +79,15 @@ void Level::moveSaw()
 			releaseSaw();
 		}
 	}
+}
+
+bool Level::checkCollision(FloatRect characterArea)
+{
+	if (freeSaw != nullptr)
+	{
+		FloatRect sawArea = freeSaw->getArea();
+		return characterArea.intersects(sawArea);
+	}
+
+	return 0;
 }

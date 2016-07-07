@@ -16,6 +16,7 @@ public:
 	void setSpeed(int value);
 	void move();
 	bool inScreen(int width);
+	FloatRect getArea();
 private:
 	int speed;
 	Sprite sprite;
