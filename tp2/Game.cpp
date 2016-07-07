@@ -120,9 +120,9 @@ void Game::drawGame()
 {
 	pWnd->draw(backgroundSprite);
 	pWnd->draw(doorSprite);
-	for each (Level level in levels)
+	for (int i = 0; i < LEVELS; ++i)
 	{
-		level.draw(*pWnd);
+		levels[i].draw(*pWnd);
 	}
 	character.draw(*pWnd);
 }

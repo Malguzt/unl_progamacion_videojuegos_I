@@ -1,20 +1,14 @@
 #pragma once
 #include "Saw.h"
 #include <SFML/Graphics.hpp>
-class List
+#include "Collection.h"
+class List : public Collection
 {
 public:
 	List();
 	~List();
 	void add(Saw *saw);
-	void setPosition(float x, float y);
-	void setPosition(Vector2f newPosition);
-	void sortSaws();
-	void draw(RenderWindow &gm);
-	Saw* getNext();
-	void clean();
+	virtual void setPosition(float x, float y);
 private:
-	Saw *first = nullptr;
-	Vector2f position;
 	Saw* getLast();
 };

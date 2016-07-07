@@ -14,7 +14,7 @@ Level::~Level()
 void Level::setY(float y)
 {
 	floorSprite.setPosition(0, y);
-	saws.setPosition(floorSprite.getPosition());
+	saws.setPosition(floorSprite.getPosition().x, floorSprite.getPosition().y);
 }
 
 void Level::setWidth(int value)
