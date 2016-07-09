@@ -9,6 +9,7 @@ Collection::Collection()
 
 Collection::~Collection()
 {
+	clean();
 }
 
 void Collection::sortSaws()

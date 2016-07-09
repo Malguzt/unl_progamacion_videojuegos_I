@@ -17,6 +17,7 @@ public:
 	void move();
 	bool inScreen(int width);
 	FloatRect getArea();
+	Vector2f getPosition();
 private:
 	int speed;
 	Sprite sprite;

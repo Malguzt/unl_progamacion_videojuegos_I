@@ -64,3 +64,8 @@ FloatRect Saw::getArea()
 {
 	return FloatRect(sprite.getPosition().x - 32, sprite.getPosition().y - 32, 60, 60);
 }
+
+Vector2f Saw::getPosition()
+{
+	return sprite.getPosition();
+}

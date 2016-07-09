@@ -122,6 +122,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="List.cpp" />
+    <ClCompile Include="Pool.cpp" />
     <ClCompile Include="Saw.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -131,6 +132,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Pool.h" />
     <ClInclude Include="Saw.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

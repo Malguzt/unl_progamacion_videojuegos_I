@@ -1,5 +1,6 @@
 #pragma once
 #include "List.h"
+#include "Pool.h"
 class Level
 {
 public:
@@ -16,7 +17,7 @@ public:
 private:
 	int dificult;
 	int width;
-	List saws;
+	Pool saws;
 	Saw *freeSaw = nullptr;
 	Texture floorTexture;
 	Sprite floorSprite;

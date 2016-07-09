@@ -8,7 +8,6 @@ List::List()
 
 List::~List()
 {
-	clean();
 }
 
 void List::add(Saw *saw)

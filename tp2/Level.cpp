@@ -54,7 +54,7 @@ void Level::releaseSaw()
 
 	if (freeSaw != nullptr) 
 	{
-		freeSaw->setSpeed(dificult * 2);
+		freeSaw->setSpeed(dificult * 3);
 	}
 }
 
