@@ -39,6 +39,12 @@
     <ClCompile Include="Pool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ListLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

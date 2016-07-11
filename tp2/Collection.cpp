@@ -12,6 +12,10 @@ Collection::~Collection()
 	clean();
 }
 
+void Collection::setSense(int value)
+{
+}
+
 void Collection::sortSaws()
 {
 	first->moveX(SAW_DIAMETER);
@@ -50,4 +54,9 @@ Saw* Collection::getNext()
 	}
 
 	return next;
+}
+
+bool Collection::hasNest()
+{
+	return first != nullptr;
 }

@@ -48,6 +48,11 @@ void Saw::setSpeed(int value)
 	speed = value;
 }
 
+int Saw::getSpeed()
+{
+	return speed;
+}
+
 void Saw::move()
 {
 	sprite.rotate(speed);

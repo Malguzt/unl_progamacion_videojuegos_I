@@ -14,12 +14,13 @@ public:
 	void setPosition(float x, float y);
 	float moveX(float x);
 	void setSpeed(int value);
+	int getSpeed();
 	void move();
 	bool inScreen(int width);
 	FloatRect getArea();
 	Vector2f getPosition();
 private:
-	int speed;
+	int speed = 0;
 	Sprite sprite;
 	Texture texture;
 	Saw *next = nullptr;

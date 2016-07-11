@@ -32,7 +32,7 @@ private:
 	FloatRect doorRect;
 	Texture backgroundTexture;
 	Sprite backgroundSprite;
-	Level levels[LEVELS];
+	Level *levels[LEVELS];
 	int level = 0;
 };
 

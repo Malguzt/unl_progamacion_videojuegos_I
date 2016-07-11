@@ -11,12 +11,6 @@ Level::~Level()
 {
 }
 
-void Level::setY(float y)
-{
-	floorSprite.setPosition(0, y);
-	saws.setPosition(floorSprite.getPosition().x, floorSprite.getPosition().y);
-}
-
 void Level::setWidth(int value)
 {
 	width = value;
@@ -30,7 +24,6 @@ float Level::getY()
 
 void Level::draw(RenderWindow & gm)
 {
-	saws.draw(gm);
 	if (freeSaw != nullptr)
 	{
 		freeSaw->draw(gm);
@@ -41,20 +34,9 @@ void Level::draw(RenderWindow & gm)
 void Level::setDificult(int value)
 {
 	dificult = value;
-	saws.clean();
+	clean();
 	for (int i = 0; i < dificult; i++) {
-		saws.add(new Saw());
-	}
-}
-
-void Level::releaseSaw()
-{
-	freeSaw = saws.getNext();
-	freeSaw->setNext(nullptr);
-
-	if (freeSaw != nullptr) 
-	{
-		freeSaw->setSpeed(dificult * 3);
+		add(new Saw());
 	}
 }
 
@@ -68,7 +50,7 @@ void Level::moveSaw()
 		}
 		else {
 			freeSaw->inScreen(width);
-			saws.add(freeSaw);
+			add(freeSaw);
 			releaseSaw();
 		}
 	}
