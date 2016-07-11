@@ -35,7 +35,8 @@ void Level::setDificult(int value)
 {
 	dificult = value;
 	clean();
-	for (int i = 0; i < dificult; i++) {
+	int max = dificult < 4 ? dificult : 4;
+	for (int i = 0; i < max; i++) {
 		add(new Saw());
 	}
 }

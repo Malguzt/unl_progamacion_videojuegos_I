@@ -12,7 +12,7 @@ Game::Game()
 	font.loadFromFile("sixty.ttf");
 	text.setFont(font);
 	text.setCharacterSize(50);
-	text.setPosition(300, 100);
+	text.setPosition(20, 20);
 
 	backgroundTexture.loadFromFile("img/background.png");
 	backgroundTexture.setRepeated(true);
@@ -24,14 +24,14 @@ Game::Game()
 	for (int i = 0; i < LEVELS; i++) {
 		if (i % 2 == 0)
 		{
-			levels[i] = new ListLevel();
+			levels[i] = new PoolLevel();
 		}
 		else
 		{
-			levels[i] = new PoolLevel();
+			levels[i] = new ListLevel();
 		}
 	
-	levels			[i]->setWidth(WIDTH);
+		levels[i]->setWidth(WIDTH);
 		levels[i]->setY(HEIGHT - distance * i - 10);
 		levels[i]->setDificult(DIFICULT + i);
 	}
@@ -44,7 +44,7 @@ Game::Game()
 	pWnd = new RenderWindow(VideoMode(WIDTH, HEIGHT), "Cuidado que te sierra");
 	pWnd->setFramerateLimit(60);
 
-	character.setLevel(levels[level]->getY());
+	character.setPosition(Vector2f(WIDTH / 2, levels[level]->getY()));
 }
 
 Game::~Game()
@@ -71,21 +71,31 @@ void Game::Go()
 		pWnd->clear();
 		if (lost)
 		{
-			text.setColor(Color::Red);
-			text.setString("Perdiste\n");
-			pWnd->draw(text);
+			level = 0;
+			character.setPosition(Vector2f(WIDTH / 2, levels[level]->getY()));
+			lost = false;
 		}
 		else if (win)
 		{
 			text.setColor(Color::Green);
 			text.setString("Ganaste\n");
+		}
+		else if (clock.getElapsedTime().asSeconds() > 30) 
+		{
+			text.setColor(Color::Red);
+			text.setString("Perdiste\n");
 			pWnd->draw(text);
 		}
 		else
 		{
+			text.setColor(Color::White);
+			ostringstream ss;
+			ss << 30 - (int) clock.getElapsedTime().asSeconds();
+			text.setString("Tiempo: 00:" + ss.str());
 			updateGame();
 			drawGame();
 		}
+		pWnd->draw(text);
 		pWnd->display();
 
 	}

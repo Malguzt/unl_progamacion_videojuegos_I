@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-#define LEVELS 6
+#define LEVELS 7
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -34,6 +34,7 @@ private:
 	Sprite backgroundSprite;
 	Level *levels[LEVELS];
 	int level = 0;
+	Clock clock;
 };
 
 #endif // GAME_H

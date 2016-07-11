@@ -4,7 +4,6 @@ using namespace sf;
 
 Character::Character()
 {
-	position = Vector2f(400, 500);
 	texture.loadFromFile("img/lumberman.png");
 	sprite.setTexture(texture);
 	sprite.setPosition(position);
@@ -38,10 +37,15 @@ void Character::moveRight()
 
 void Character::setLevel(float y)
 {
-	position.y = y - 70;
+	setPosition(Vector2f(position.x, y));
 }
 
 FloatRect Character::getArea()
 {
 	return FloatRect(position, Vector2f(70, 68));
+}
+
+void Character::setPosition(Vector2f value)
+{
+	position = value - Vector2f(0, 70);
 }

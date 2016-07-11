@@ -15,6 +15,7 @@ public:
 	void moveLeft();
 	void setLevel(float);
 	FloatRect getArea();
+	void setPosition(Vector2f value);
 protected:
 private:
 	Vector2f position;
