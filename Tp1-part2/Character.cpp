@@ -5,7 +5,7 @@ using namespace sf;
 Character::Character()
 {
     jumping = false;
-    position = Vector2f(400, 500);
+    position = Vector2f(390, 500);
     texture.loadFromFile("img/lumberman.png");
     sprite.setTexture(texture);
     sprite.setPosition(position);
@@ -23,7 +23,7 @@ void Character::draw(RenderWindow &gm)
 void Character::update()
 {
     if (jumping) {
-        if (position.y > 200) {
+        if (position.y > 350) {
             position.y -= 5;
         } else {
             jumping = false;
@@ -38,18 +38,23 @@ void Character::update()
 void Character::moveLeft()
 {
     if(position.x > 0) {
-        position.x -= 10;
+        position.x -= 70;
     }
 }
 
 void Character::moveRight()
 {
     if(position.x < 730) {
-        position.x += 10;
+        position.x += 70;
     }
 }
 
 void Character::jump()
 {
     jumping = true;
+}
+
+FloatRect Character::getArea()
+{
+	return FloatRect(position, Vector2f(70, 79));
 }

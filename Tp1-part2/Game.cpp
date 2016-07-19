@@ -60,7 +60,6 @@ void Game::processKey(int keyCode)
     if(Keyboard::isKeyPressed(Keyboard::Right)) character.moveRight();
     if(Keyboard::isKeyPressed(Keyboard::Left)) character.moveLeft();
     if(Keyboard::isKeyPressed(Keyboard::Up)) character.jump();
-    // if(Keyboard::isKeyPressed(Keyboard::Down)) character.kneel();
 
     switch(keyCode)
     {
@@ -73,6 +72,7 @@ void Game::processKey(int keyCode)
 void Game::updateGame()
 {
     character.update();
+	blocks.checkHit(character.getArea());
 }
 
 void Game::drawGame()

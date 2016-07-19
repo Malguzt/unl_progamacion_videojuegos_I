@@ -14,13 +14,13 @@ class Character
         void moveRight();
         void moveLeft();
         void jump();
+		FloatRect getArea();
     protected:
     private:
         bool jumping;
         Vector2f position;
         Sprite sprite;
         Texture texture;
-        void changePosition();
 };
 
 #endif // CHARACTER_H

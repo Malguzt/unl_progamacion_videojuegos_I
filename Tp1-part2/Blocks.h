@@ -12,9 +12,15 @@ public:
 	Blocks();
 	~Blocks();
 	void draw(RenderWindow &gm);
+	void checkHit(FloatRect);
 private:
+	int next = 0;
+	Font font;
+	Text text;
 	Texture boxTexture;
 	Sprite boxSprite;
 	int numbers[QUANTITY];
+	int sortedNumbers[QUANTITY];
+	void createSortedNumbers();
 };
 
