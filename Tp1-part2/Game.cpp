@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <sstream>
 #define HEIGHT 600
 #define WIDTH 800
 Game::Game()
@@ -16,6 +17,11 @@ Game::Game()
 
     pWnd = new RenderWindow(VideoMode(WIDTH, HEIGHT), "A los piedrazos");
     pWnd->setFramerateLimit(60);
+
+	font.loadFromFile("sixty.ttf");
+	text.setFont(font);
+	text.setCharacterSize(50);
+	text.setPosition(20, 20);
 }
 
 Game::~Game()
@@ -36,8 +42,11 @@ void Game::Go()
         }
 
         pWnd->clear();
-        updateGame();
-        drawGame();
+		if (clock.getElapsedTime().asSeconds() < time)
+		{
+			updateGame();
+		}
+		drawGame();
         pWnd->display();
     }
 }
@@ -72,13 +81,25 @@ void Game::processKey(int keyCode)
 void Game::updateGame()
 {
     character.update();
-	blocks.checkHit(character.getArea());
+	if (!blocks.checkHit(character.getArea())) {
+		time -= 10;
+	}
 }
 
 void Game::drawGame()
 {
+	bool inTime = clock.getElapsedTime().asSeconds() < time;
     pWnd->draw(backgroundSprite);
 	pWnd->draw(floorSprite);
     character.draw(*pWnd);
-	blocks.draw(*pWnd);
+
+	blocks.draw(*pWnd, !inTime);
+	if (inTime)
+	{
+		text.setColor(Color::White);
+		ostringstream ss;
+		ss << time - (int)clock.getElapsedTime().asSeconds();
+		text.setString("Tiempo: 00:" + ss.str());
+		pWnd->draw(text);
+	}
 }

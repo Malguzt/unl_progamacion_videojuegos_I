@@ -23,7 +23,7 @@ void Character::draw(RenderWindow &gm)
 void Character::update()
 {
     if (jumping) {
-        if (position.y > 350) {
+        if (position.y > 370) {
             position.y -= 5;
         } else {
             jumping = false;

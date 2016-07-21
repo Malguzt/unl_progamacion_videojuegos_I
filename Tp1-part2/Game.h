@@ -27,6 +27,10 @@ class Game
 		Sprite backgroundSprite;
 		Texture floorTexture;
 		Sprite floorSprite;
+		Clock clock;
+		Font font;
+		Text text;
+		int time = 60;
 };
 
 #endif // GAME_H

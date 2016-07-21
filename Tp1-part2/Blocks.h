@@ -11,8 +11,8 @@ class Blocks
 public:
 	Blocks();
 	~Blocks();
-	void draw(RenderWindow &gm);
-	void checkHit(FloatRect);
+	void draw(RenderWindow &gm, bool sorted);
+	bool checkHit(FloatRect);
 private:
 	int next = 0;
 	Font font;
