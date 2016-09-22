@@ -1,5 +1,7 @@
 #pragma once
 #include "List.h"
+#include "Wagon.h"
+
 class Level
 {
 public:
@@ -19,5 +21,6 @@ private:
 	int width;
 	int dificult;
 	FloatRect stationArea;
+	Wagon *wagon;
 };
 

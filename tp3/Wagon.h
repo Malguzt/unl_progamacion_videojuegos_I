@@ -17,8 +17,11 @@ public:
 	FloatRect getArea();
 	Vector2f getPosition();
 private:
+	Font font;
+	Text text;
 	Sprite sprite;
 	Texture texture;
 	Wagon *next = nullptr;
+	int result;
 };
 

@@ -3,6 +3,7 @@
 List::List()
 {
 	first = NULL;
+	srand(time(NULL));
 }
 
 

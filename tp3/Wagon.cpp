@@ -5,12 +5,19 @@ using namespace std;
 
 Wagon::Wagon()
 {
+	font.loadFromFile("sixty.ttf");
+	text.setFont(font);
+	text.setCharacterSize(20);
+	text.setColor(Color::Black);
+
 	String file = "img/wagon_n.png";
 	file[10] = rand() % 4 + '1';
 	texture.loadFromFile(file);
 
 	texture.setSmooth(true);
 	sprite.setTexture(texture);
+	result = rand() % 99;
+	text.setString(to_string(result));
 }
 
 
@@ -21,6 +28,8 @@ Wagon::~Wagon()
 void Wagon::draw(RenderWindow &gm)
 {
 	gm.draw(sprite);
+	text.setPosition(getPosition().x + 50, getPosition().y + 5);
+	gm.draw(text);
 }
 
 Wagon* Wagon::getNext() {
