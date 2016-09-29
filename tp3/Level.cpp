@@ -5,8 +5,6 @@ Level::Level()
 	floorTexture.loadFromFile("img/floor.jpg");
 	floorTexture.setRepeated(true);
 	floorSprite.setTexture(floorTexture);
-	stationTexture.loadFromFile("img/station.png");
-	stationSprite.setTexture(stationTexture);
 	wagon = new Wagon();
 }
 
@@ -29,16 +27,30 @@ float Level::getY()
 void Level::draw(RenderWindow & gm)
 {
 	gm.draw(floorSprite);
-	wagon->draw(gm);
+	if (wagon != nullptr) {
+		wagon->draw(gm);
+	}
 }
 
 bool Level::checkCollision(FloatRect trainArea)
 {
-	return trainArea.intersects(FloatRect(stationSprite.getPosition(), (Vector2f) stationTexture.getSize()));
+	return wagon != nullptr ? trainArea.intersects(wagon->getArea()) : false;
+}
+
+Wagon* Level::takeTheWagon()
+{
+	Wagon* aux = wagon;
+	wagon = nullptr;
+	return aux;
+}
+
+int Level::getWagonNumber()
+{
+	return wagon->getNumber();
 }
 
 void Level::setY(float y)
 {
 	floorSprite.setPosition(0, y);
-	wagon->setPosition(rand() % width, getY() - 40);
+	wagon->setPosition(rand() % (width - 240) + 120, getY() - 40);
 }

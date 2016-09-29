@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <sstream>
 #define HEIGHT 700
 #define WIDTH 1200
 
@@ -29,6 +28,8 @@ Game::Game()
 	pWnd->setFramerateLimit(60);
 
 	train.setPosition(Vector2f(1, levels[level].getY()));
+
+	modal.setRect(FloatRect(WIDTH/2, HEIGHT/2, WIDTH/4, HEIGHT/4));
 }
 
 Game::~Game()
@@ -49,25 +50,20 @@ void Game::Go()
 		}
 
 		pWnd->clear();
-		if (lost)
+		if (errors > 2)
 		{
-			level = 0;
-			train.setPosition(Vector2f(WIDTH / 2, levels[level].getY()));
-			lost = false;
+			modal.draw(*pWnd, "Perdiste\n");
 		}
 		else if (win)
 		{
-			text.setColor(Color::Green);
-			text.setString("Ganaste\n");
+			modal.draw(*pWnd, "Ganaste\n");
 		}
 		else
 		{
 			updateGame();
 			drawGame();
 		}
-		pWnd->draw(text);
 		pWnd->display();
-
 	}
 }
 
@@ -91,6 +87,46 @@ void Game::processKey(int keyCode)
 	case Keyboard::Escape:
 		pWnd->close();
 		break;
+	case Keyboard::Num0:
+	case Keyboard::Numpad0:
+		input << "0";
+		break;
+	case Keyboard::Num1:
+	case Keyboard::Numpad1:
+		input << "1";
+		break;
+	case Keyboard::Num2:
+	case Keyboard::Numpad2:
+		input << "2";
+		break;
+	case Keyboard::Num3:
+	case Keyboard::Numpad3:
+		input << "3";
+		break;
+	case Keyboard::Num4:
+	case Keyboard::Numpad4:
+		input << "4";
+		break;
+	case Keyboard::Num5:
+	case Keyboard::Numpad5:
+		input << "5";
+		break;
+	case Keyboard::Num6:
+	case Keyboard::Numpad6:
+		input << "6";
+		break;
+	case Keyboard::Num7:
+	case Keyboard::Numpad7:
+		input << "7";
+		break;
+	case Keyboard::Num8:
+	case Keyboard::Numpad8:
+		input << "8";
+		break;
+	case Keyboard::Num9:
+	case Keyboard::Numpad9:
+		input << "9";
+		break;
 	}
 }
 
@@ -100,7 +136,35 @@ void Game::updateGame()
 		train.setPosition(Vector2f(0, levels[--level].getY()));
 	}
 	train.update();
-	//lost = levels[level].checkCollision(train.getArea());
+	if (levels[level].checkCollision(train.getArea())) {
+		Event evt;
+		stringstream sum;
+		input.str("");
+		clock.restart();
+		drawGame();
+		int wagonNumber = levels[level].getWagonNumber();
+		int a = rand() % wagonNumber;
+		int b = rand() % (wagonNumber - a);
+		while (clock.getElapsedTime().asSeconds() < 3 && input.str() != to_string(wagonNumber))
+		{
+			sum.str("");
+			sum << to_string(a) << '+' << to_string(b) << "+" << to_string(wagonNumber - a - b) << "= " << input.str();
+			modal.draw(*pWnd, sum.str());
+			pWnd->display();
+			while (pWnd->pollEvent(evt))
+			{
+				processEvent(evt);
+			}
+		}
+		if (input.str() == to_string(wagonNumber)) {
+			train.add(levels[level].takeTheWagon());
+		}
+		else {
+			errors++;
+			levels[level].takeTheWagon();
+			train.release();
+		}
+	}
 
 	win = stationRect.intersects(train.getArea());
 }

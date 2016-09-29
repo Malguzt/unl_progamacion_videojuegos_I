@@ -71,6 +71,7 @@ bool List::hasNest()
 void List::add(Wagon *wagon)
 {
 	wagon->setPosition(position.x + 70, position.y);
+	wagon->added();
 	if (first == nullptr)
 	{
 		first = wagon;
@@ -79,6 +80,27 @@ void List::add(Wagon *wagon)
 	{
 		getLast()->setNext(wagon);
 		first->moveX(70);
+	}
+}
+
+void List::release()
+{
+	Wagon *last = first;
+	Wagon *previous = nullptr;
+
+	while (last != nullptr && last->getNext() != nullptr)
+	{
+		previous = last;
+		last = last->getNext();
+	}
+	if (previous != nullptr) {
+		previous->setNext(nullptr);
+	}
+	if (last != nullptr) {
+		delete last;
+	}
+	if (last == first) {
+		first = nullptr;
 	}
 }
 

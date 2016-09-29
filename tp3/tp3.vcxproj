@@ -121,6 +121,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Modal.cpp" />
     <ClCompile Include="Train.cpp" />
     <ClCompile Include="Wagon.cpp" />
   </ItemGroup>
@@ -128,6 +129,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Modal.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Wagon.h" />
   </ItemGroup>

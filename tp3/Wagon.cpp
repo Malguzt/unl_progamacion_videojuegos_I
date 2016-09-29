@@ -5,9 +5,9 @@ using namespace std;
 
 Wagon::Wagon()
 {
-	font.loadFromFile("sixty.ttf");
+	font.loadFromFile("ApleTime.ttf");
 	text.setFont(font);
-	text.setCharacterSize(20);
+	text.setCharacterSize(17);
 	text.setColor(Color::Black);
 
 	String file = "img/wagon_n.png";
@@ -28,8 +28,10 @@ Wagon::~Wagon()
 void Wagon::draw(RenderWindow &gm)
 {
 	gm.draw(sprite);
-	text.setPosition(getPosition().x + 50, getPosition().y + 5);
-	gm.draw(text);
+	if (inTheTrain) {
+		text.setPosition(getPosition().x + 50, getPosition().y + 10);
+		gm.draw(text);
+	}
 }
 
 Wagon* Wagon::getNext() {
@@ -76,4 +78,14 @@ FloatRect Wagon::getArea()
 Vector2f Wagon::getPosition()
 {
 	return sprite.getPosition();
+}
+
+void Wagon::added()
+{
+	inTheTrain = true;
+}
+
+int Wagon::getNumber()
+{
+	return result;
 }

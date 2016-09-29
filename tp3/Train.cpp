@@ -26,7 +26,7 @@ void Train::draw(RenderWindow &gm)
 
 void Train::update()
 {
-	moveX(2);
+	moveX(5);
 	wagons.setPosition(position.x, position.y);
 }
 
@@ -50,6 +50,17 @@ bool Train::inScreen(int width)
 {
 	bool inScreen = position.x > 0 && position.x < width + texture.getSize().x;
 	return inScreen = inScreen || wagons.inScreen(width);
+}
+
+void Train::add(Wagon * wagon)
+{
+	wagons.add(wagon);
+	wagons.sortWagons();
+}
+
+void Train::release()
+{
+	wagons.release();
 }
 
 void Train::moveX(float x)

@@ -2,6 +2,7 @@
 #include "List.h"
 #include "Wagon.h"
 
+
 class Level
 {
 public:
@@ -11,11 +12,11 @@ public:
 	void draw(RenderWindow &gm);
 	void setWidth(int width);
 	float getY();
-	bool checkCollision(FloatRect characterArea);
+	bool checkCollision(FloatRect trainArea);
+	Wagon* takeTheWagon();
+	int getWagonNumber();
 protected:
 private:
-	Texture stationTexture;
-	Sprite stationSprite;
 	Texture floorTexture;
 	Sprite floorSprite;
 	int width;

@@ -10,6 +10,7 @@ public:
 	List();
 	virtual ~List();
 	void add(Wagon *wagon);
+	void release();
 	void setPosition(float x, float y);
 	void sortWagons();
 	void draw(RenderWindow &gm);

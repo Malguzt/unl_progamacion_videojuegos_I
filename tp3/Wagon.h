@@ -16,7 +16,10 @@ public:
 	bool inScreen(int width);
 	FloatRect getArea();
 	Vector2f getPosition();
+	void added();
+	int getNumber();
 private:
+	bool inTheTrain = false;
 	Font font;
 	Text text;
 	Sprite sprite;

@@ -15,6 +15,8 @@ public:
 	FloatRect getArea();
 	void setPosition(Vector2f value);
 	bool inScreen(int width);
+	void add(Wagon* wagon);
+	void release();
 protected:
 private:
 	void moveX(float x);

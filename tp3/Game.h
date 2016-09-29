@@ -4,8 +4,10 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <sstream>
 #include "Train.h"
 #include "Level.h"
+#include "Modal.h"
 
 using namespace sf;
 using namespace std;
@@ -17,10 +19,8 @@ public:
 	virtual ~Game();
 	void Go();
 private:
-	Font font;
-	Text text;
 	bool win = false;
-	bool lost = false;
+	int errors = 0;
 	RenderWindow *pWnd;
 	Train train;
 	void processEvent(Event &evt);
@@ -34,6 +34,9 @@ private:
 	Sprite backgroundSprite;
 	Level levels[LEVELS];
 	int level = LEVELS - 1;
+	Modal modal;
+	Clock clock;
+	stringstream input;
 };
 
 #endif // GAME_H
