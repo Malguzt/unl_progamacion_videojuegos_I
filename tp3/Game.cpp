@@ -145,7 +145,7 @@ void Game::updateGame()
 		int wagonNumber = levels[level].getWagonNumber();
 		int a = rand() % wagonNumber;
 		int b = rand() % (wagonNumber - a);
-		while (clock.getElapsedTime().asSeconds() < 3 && input.str() != to_string(wagonNumber))
+		while (clock.getElapsedTime().asSeconds() < 5 && input.str() != to_string(wagonNumber))
 		{
 			sum.str("");
 			sum << to_string(a) << '+' << to_string(b) << "+" << to_string(wagonNumber - a - b) << "= " << input.str();

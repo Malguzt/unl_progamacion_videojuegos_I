@@ -14,6 +14,7 @@ List::~List()
 
 void List::sortWagons()
 {
+
 	first->moveX(20);
 }
 
@@ -49,7 +50,7 @@ void List::moveX(float x)
 
 bool List::inScreen(int width)
 {
-	return first->inScreen(width);
+	return first != nullptr && first->inScreen(width);
 }
 
 Wagon* List::getNext()
@@ -70,7 +71,6 @@ bool List::hasNest()
 
 void List::add(Wagon *wagon)
 {
-	wagon->setPosition(position.x + 70, position.y);
 	wagon->added();
 	if (first == nullptr)
 	{
@@ -78,7 +78,19 @@ void List::add(Wagon *wagon)
 	}
 	else
 	{
-		getLast()->setNext(wagon);
+		Wagon *previous = nullptr;
+		Wagon *next = first;
+		while (next != nullptr && next->getNumber() < wagon->getNumber()) {
+			previous = next;
+			next = next->getNext();
+		}
+		if (previous != nullptr) {
+			previous->setNext(wagon);
+		}
+		else {
+			first = wagon;
+		}
+		wagon->setNext(next);
 		first->moveX(70);
 	}
 }

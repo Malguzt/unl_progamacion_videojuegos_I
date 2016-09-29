@@ -8,7 +8,7 @@ Train::Train()
 	texture.loadFromFile("img/engine.png");
 	sprite.setTexture(texture);
 	sprite.setPosition(position);
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 2; ++i) {
 		Wagon *newWagon = new Wagon();
 		wagons.add(newWagon);
 	}
@@ -26,7 +26,7 @@ void Train::draw(RenderWindow &gm)
 
 void Train::update()
 {
-	moveX(5);
+	moveX(3);
 	wagons.setPosition(position.x, position.y);
 }
 
